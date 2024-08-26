@@ -102,22 +102,36 @@ int main(void)
         return 1;
     }
     float positions[] = {
-        -0.5, -0.5,
-         0.0,  0.5,
-         0.5, -0.5
+        -0.5, -0.5, // 0
+         0.5, -0.5, // 1
+         0.5,  0.5, // 2
+        -0.5,  0.5, // 3 
+    };
+
+    unsigned int indices[] = {
+        0, 1, 2,
+        2, 3, 0,
     };
 
     unsigned int buffer;
     glGenBuffers(1, &buffer);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
-    glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(float), positions, GL_STREAM_DRAW); // could also use sizeof(positions) for size input
-    
+    //glBufferData(GL_ARRAY_BUFFER, 6 * 2 * sizeof(float), positions, GL_STREAM_DRAW); // could also use sizeof(positions) for size input
+    glBufferData(GL_ARRAY_BUFFER, sizeof(positions), positions, GL_STREAM_DRAW); // could also use sizeof(positions) for size input
+
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (const void *)0);
     
-    
+    unsigned int ibo;
+    glGenBuffers(1, &ibo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STREAM_DRAW); // could also use sizeof(positions) for size input
 
-    unsigned int shader = CreateShader(vertexShader, fragmentShader);
+
+
+    ShaderProgramSource source = ParseShader("res/shaders/Basic.shader");
+    
+    unsigned int shader = CreateShader(source.VertexSource, source.FragmentSource);
     glUseProgram(shader);
 
     /* Loop until the user closes the window */
@@ -126,8 +140,8 @@ int main(void)
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glDrawArrays(GL_TRIANGLES, 0, 3); // draws whatever buffer was bound last
-        //glDrawElements(GL_TRIANGLES, 3, type, indices);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+        //glDrawArrays(GL_TRIANGLES, 0, 3); // draws whatever buffer was bound last
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
