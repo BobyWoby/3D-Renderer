@@ -1,7 +1,7 @@
 ﻿  Application.cpp
-C:\Users\bobywoby\Development\OpenGL\OpenGL\src\Application.cpp(257,31): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\bobywoby\Development\OpenGL\OpenGL\src\Application.cpp(257,54): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\bobywoby\Development\OpenGL\OpenGL\src\Application.cpp(257,60): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\bobywoby\Development\OpenGL\OpenGL\src\Application.cpp(257,66): warning C4305: 'initializing': truncation from 'double' to 'float'
-C:\Users\bobywoby\Development\OpenGL\OpenGL\src\Application.cpp(282,56): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\bobywoby\Development\OpenGL\OpenGL\src\Application.cpp(152,31): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\bobywoby\Development\OpenGL\OpenGL\src\Application.cpp(152,54): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\bobywoby\Development\OpenGL\OpenGL\src\Application.cpp(152,60): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\bobywoby\Development\OpenGL\OpenGL\src\Application.cpp(152,66): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\bobywoby\Development\OpenGL\OpenGL\src\Application.cpp(177,56): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   OpenGL.vcxproj -> C:\Users\bobywoby\Development\OpenGL\x64\Debug\OpenGL.exe

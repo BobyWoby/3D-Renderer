@@ -4,8 +4,10 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include "Renderer.h"
 
-
+#include "VertexBuffer.h"
+#include "IndexBuffer.h"
 
 
 struct ShaderProgramSource
@@ -13,112 +15,6 @@ struct ShaderProgramSource
     std::string VertexSource;
     std::string FragmentSource;
 };
-static void GLAPIENTRY ErrorMessage(GLenum source,
-    GLenum type,
-    GLuint id,
-    GLenum severity,
-    GLsizei length,
-    const GLchar* message,
-    const void* userParam) 
-{
-
-    char* _source;
-    char* _type;
-    char* _severity;
-
-    switch (source) {
-    case GL_DEBUG_SOURCE_API:
-        _source = (char *)"API";
-        break;
-
-    case GL_DEBUG_SOURCE_WINDOW_SYSTEM:
-        _source = (char*)"WINDOW SYSTEM";
-        break;
-
-    case GL_DEBUG_SOURCE_SHADER_COMPILER:
-        _source = (char*)"SHADER COMPILER";
-        break;
-
-    case GL_DEBUG_SOURCE_THIRD_PARTY:
-        _source = (char*)"THIRD PARTY";
-        break;
-
-    case GL_DEBUG_SOURCE_APPLICATION:
-        _source = (char*)"APPLICATION";
-        break;
-
-    case GL_DEBUG_SOURCE_OTHER:
-        _source = (char*)"UNKNOWN";
-        break;
-
-    default:
-        _source = (char*)"UNKNOWN";
-        break;
-    }
-
-    switch (type) {
-    case GL_DEBUG_TYPE_ERROR:
-        _type = (char*)"ERROR";
-        break;
-
-    case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR:
-        _type = (char*)"DEPRECATED BEHAVIOR";
-        break;
-
-    case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR:
-        _type = (char*)"UDEFINED BEHAVIOR";
-        break;
-
-    case GL_DEBUG_TYPE_PORTABILITY:
-        _type = (char*)"PORTABILITY";
-        break;
-
-    case GL_DEBUG_TYPE_PERFORMANCE:
-        _type = (char*)"PERFORMANCE";
-        break;
-
-    case GL_DEBUG_TYPE_OTHER:
-        _type = (char*)"OTHER";
-        break;
-
-    case GL_DEBUG_TYPE_MARKER:
-        _type = (char*)"MARKER";
-        break;
-
-    default:
-        _type = (char*)"UNKNOWN";
-        break;
-    }
-
-    switch (severity) {
-    case GL_DEBUG_SEVERITY_HIGH:
-        _severity = (char*)"HIGH";
-        break;
-
-    case GL_DEBUG_SEVERITY_MEDIUM:
-        _severity = (char*)"MEDIUM";
-        break;
-
-    case GL_DEBUG_SEVERITY_LOW:
-        _severity = (char*)"LOW";
-        break;
-
-    case GL_DEBUG_SEVERITY_NOTIFICATION:
-        _severity = (char*)"NOTIFICATION";
-        break;
-
-    default:
-        _severity = (char*)"UNKNOWN";
-        break;
-    }
-    
-    printf("%d: %s of %s severity, raised from %s: %s\n",
-        id, _type, _severity, _source, message);
-    if (severity == GL_DEBUG_SEVERITY_HIGH) {
-       
-    }
-    //exit(1);
-}
 
 static ShaderProgramSource ParseShader(const std::string& filepath)
 {
@@ -199,7 +95,7 @@ int main(void)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(640, 480, "Graphics", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -232,20 +128,11 @@ int main(void)
     glGenVertexArrays(1, &vao);
     glBindVertexArray(vao);
 
-    unsigned int buffer;
-    glGenBuffers(1, &buffer);
-    glBindBuffer(GL_ARRAY_BUFFER, buffer);
-    //glBufferData(GL_ARRAY_BUFFER, 6 * 2 * sizeof(float), positions, GL_STREAM_DRAW); // could also use sizeof(positions) for size input
-    glBufferData(GL_ARRAY_BUFFER, sizeof(positions), positions, GL_STREAM_DRAW); // could also use sizeof(positions) for size input
-
+    VertexBuffer vb(positions, sizeof(positions));
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (const void *)0);
-    
-    unsigned int ibo;
-    glGenBuffers(1, &ibo);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, 6 * sizeof(unsigned int), indices, GL_STREAM_DRAW); // could also use sizeof(positions) for size input
-    
+   
+    IndexBuffer ib(indices, 6);
    
 
 
