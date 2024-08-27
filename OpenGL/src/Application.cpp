@@ -112,73 +112,73 @@ int main(void)
     //glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
     glEnable(GL_DEBUG_OUTPUT);
     glDebugMessageCallback(ErrorMessage, 0);
-    float positions[] = {
-        -0.5, -0.5, // 0
-         0.5, -0.5, // 1
-         0.5,  0.5, // 2
-        -0.5,  0.5, // 3 
-    };
-
-    unsigned int indices[] = {
-        0, 1, 2,
-        2, 3, 0,
-    };
-
-    unsigned int vao;
-    glGenVertexArrays(1, &vao);
-    glBindVertexArray(vao);
-
-    VertexBuffer vb(positions, sizeof(positions));
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (const void *)0);
-   
-    IndexBuffer ib(indices, 6);
-   
-
-
-    ShaderProgramSource source = ParseShader("res/shaders/Basic.shader");
-    
-    unsigned int shader = CreateShader(source.VertexSource, source.FragmentSource);
-    glUseProgram(shader);
-
-    float rgb[] = { 0.0, 0.0, 0.1 }, increments[] = {0.05, 0.02, 0.05};
-
-    //uniform input
-    int u_Color = glGetUniformLocation(shader, "u_Color");
-    glUniform4f(u_Color, rgb[0], rgb[1], rgb[2], 1.0);
-
-    glBindVertexArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
-    glUseProgram(0);
-
-    /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
     {
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
-        glUniform4f(u_Color, rgb[0], rgb[1], rgb[2], 1.0);
+        float positions[] = {
+            -0.5, -0.5, // 0
+             0.5, -0.5, // 1
+             0.5,  0.5, // 2
+            -0.5,  0.5, // 3 
+        };
 
-        glBindVertexArray(vao); // bind vertex array
+        unsigned int indices[] = {
+            0, 1, 2,
+            2, 3, 0,
+        };
+
+        unsigned int vao;
+        glGenVertexArrays(1, &vao);
+        glBindVertexArray(vao);
+
+        VertexBuffer vb(positions, sizeof(positions));
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(float), (const void*)0);
+        IndexBuffer ib(indices, 6);
+
+
+        ShaderProgramSource source = ParseShader("res/shaders/Basic.shader");
+
+        unsigned int shader = CreateShader(source.VertexSource, source.FragmentSource);
         glUseProgram(shader);
 
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+        float rgb[] = { 0.0, 0.0, 0.1 }, increments[] = { 0.05, 0.02, 0.05 };
 
-        for (int i = 0; i < 3; i++) {
-            if (rgb[i] > 1.0) increments[i] *= -1;
-            else if (rgb[i] <= 0.0) increments[i] = (i == 0) ? 0.02 : ( i == 2) ? 0.05: 0.02;
-            rgb[i] += increments[i];
+        //uniform input
+        int u_Color = glGetUniformLocation(shader, "u_Color");
+        glUniform4f(u_Color, rgb[0], rgb[1], rgb[2], 1.0);
+
+        glBindVertexArray(0);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        glUseProgram(0);
+
+        /* Loop until the user closes the window */
+        while (!glfwWindowShouldClose(window))
+        {
+            /* Render here */
+            glClear(GL_COLOR_BUFFER_BIT);
+            glUniform4f(u_Color, rgb[0], rgb[1], rgb[2], 1.0);
+
+            glBindVertexArray(vao); // bind vertex array
+            glUseProgram(shader);
+
+            glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
+
+            for (int i = 0; i < 3; i++) {
+                if (rgb[i] > 1.0) increments[i] *= -1;
+                else if (rgb[i] <= 0.0) increments[i] = (i == 0) ? 0.02 : (i == 2) ? 0.05 : 0.02;
+                rgb[i] += increments[i];
+            }
+
+            //glDrawArrays(GL_TRIANGLES, 0, 3); // draws whatever buffer was bound last
+
+            /* Swap front and back buffers */
+            glfwSwapBuffers(window);
+
+            /* Poll for and process events */
+            glfwPollEvents();
         }
-        
-        //glDrawArrays(GL_TRIANGLES, 0, 3); // draws whatever buffer was bound last
-
-        /* Swap front and back buffers */
-        glfwSwapBuffers(window);
-
-        /* Poll for and process events */
-        glfwPollEvents();
-    } 
-    glDeleteProgram(shader);
+        glDeleteProgram(shader);
+    }
     glfwTerminate();
     return 0;
 }
