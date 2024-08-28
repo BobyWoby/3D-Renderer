@@ -2,3 +2,5 @@ C:\Users\bobywoby\Development\OpenGL\OpenGL\src\Application.cpp;C:\Users\bobywob
 C:\Users\bobywoby\Development\OpenGL\OpenGL\src\IndexBuffer.cpp;C:\Users\bobywoby\Development\OpenGL\OpenGL\x64\Debug\IndexBuffer.obj
 C:\Users\bobywoby\Development\OpenGL\OpenGL\src\Renderer.cpp;C:\Users\bobywoby\Development\OpenGL\OpenGL\x64\Debug\Renderer.obj
 C:\Users\bobywoby\Development\OpenGL\OpenGL\src\VertexBuffer.cpp;C:\Users\bobywoby\Development\OpenGL\OpenGL\x64\Debug\VertexBuffer.obj
+C:\Users\bobywoby\Development\OpenGL\OpenGL\src\VertexArray.cpp;C:\Users\bobywoby\Development\OpenGL\OpenGL\x64\Debug\VertexArray.obj
+C:\Users\bobywoby\Development\OpenGL\OpenGL\src\VertexBufferLayout.cpp;C:\Users\bobywoby\Development\OpenGL\OpenGL\x64\Debug\VertexBufferLayout.obj

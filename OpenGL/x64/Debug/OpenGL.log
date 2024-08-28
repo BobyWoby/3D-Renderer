@@ -4,7 +4,8 @@ C:\Users\bobywoby\Development\OpenGL\OpenGL\src\Application.cpp(143,59): warning
 C:\Users\bobywoby\Development\OpenGL\OpenGL\src\Application.cpp(143,65): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\bobywoby\Development\OpenGL\OpenGL\src\Application.cpp(143,71): warning C4305: 'initializing': truncation from 'double' to 'float'
 C:\Users\bobywoby\Development\OpenGL\OpenGL\src\Application.cpp(168,60): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-glew32s.lib(glew.obj) : warning LNK4099: PDB '' was not found with 'glew32s.lib(glew.obj)' or at ''; linking object as if no debug info
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  VertexArray.cpp
+C:\Users\bobywoby\Development\OpenGL\OpenGL\src\VertexArray.cpp(26,44): warning C4312: 'type cast': conversion from 'unsigned int' to 'const void *' of greater size
+  VertexBufferLayout.cpp
+  Generating Code...
   OpenGL.vcxproj -> C:\Users\bobywoby\Development\OpenGL\x64\Debug\OpenGL.exe
